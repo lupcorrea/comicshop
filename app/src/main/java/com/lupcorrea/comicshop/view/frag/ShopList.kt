@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lupcorrea.comicshop.R
 import com.lupcorrea.comicshop.adapter.ComicListAdapter
+import com.lupcorrea.comicshop.api.MarvelAPIConsumer
 
 class ShopList : Fragment() {
     override fun onCreateView(
@@ -25,5 +26,8 @@ class ShopList : Fragment() {
         val shopRecyclerView = view.findViewById<RecyclerView> (R.id.shop_recycler_view)
         shopRecyclerView.adapter = ComicListAdapter (view.context)
         shopRecyclerView.layoutManager = LinearLayoutManager (view.context)
+
+        val api = MarvelAPIConsumer (this.activity!!.application)
+        api.requestComicList (25, shopRecyclerView.adapter as ComicListAdapter)
     }
 }

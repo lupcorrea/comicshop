@@ -11,7 +11,7 @@ import com.lupcorrea.comicshop.model.ent.Comic
 
 class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicViewHolder>() {
     private val layoutInflater = LayoutInflater.from (context)
-    val comicList: List<Comic> = ArrayList()
+    private val comicList: MutableList<Comic> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
         val itemView = layoutInflater.inflate(R.layout.comic_item, parent, false)
@@ -25,6 +25,11 @@ class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicViewHolder
     override fun onBindViewHolder(holder: ComicViewHolder, position: Int) {
         holder.comicTitle.text = comicList[position].title
         holder.comicPrice.text = comicList[position].price
+    }
+
+    fun addComic (comic: Comic) {
+        comicList.add (comic)
+        notifyDataSetChanged()
     }
 }
 
