@@ -24,7 +24,8 @@ class MarvelAPIConsumer (app: Application) {
 
         val request = JsonObjectRequest (Request.Method.GET, requestURL, null,
             Response.Listener { response ->
-                Log.e("API Request", response.getString("code"))
+                val comics = response.getJSONObject ("data").getJSONArray ("results")
+
             }, Response.ErrorListener {
                 Log.e("API Request", it.toString())
             })

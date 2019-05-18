@@ -3,11 +3,14 @@ package com.lupcorrea.comicshop.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.lupcorrea.comicshop.view.CheckoutList
-import com.lupcorrea.comicshop.view.ShopList
+import com.lupcorrea.comicshop.view.frag.CheckoutList
+import com.lupcorrea.comicshop.view.frag.ShopList
 
 class ViewPagerAdapter (fm: FragmentManager): FragmentPagerAdapter (fm) {
-    private val fragments = arrayOf (ShopList(), CheckoutList())
+    private val fragments = arrayOf (
+        ShopList(),
+        CheckoutList()
+    )
 
     override fun getItem (position: Int): Fragment {
         return fragments [position]

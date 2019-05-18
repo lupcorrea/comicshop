@@ -1,8 +1,9 @@
-package com.lupcorrea.comicshop
+package com.lupcorrea.comicshop.view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.lupcorrea.comicshop.R
 import com.lupcorrea.comicshop.adapter.ViewPagerAdapter
 
 class MainActivity : AppCompatActivity() {
