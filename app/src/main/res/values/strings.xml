@@ -4,4 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="checkout_list">This is the checkout list!</string>
+    <string name="shopping_list">This is the Shopping list!</string>
 </resources>
