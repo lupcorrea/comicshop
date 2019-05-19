@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lupcorrea.comicshop.R
-import com.lupcorrea.comicshop.adapter.ComicListAdapter
+import com.lupcorrea.comicshop.adapter.ComicShopAdapter
 import com.lupcorrea.comicshop.viewmodel.ComicViewModel
 
 class ShopList : Fragment() {
@@ -29,13 +29,13 @@ class ShopList : Fragment() {
         super.onViewCreated (view, savedInstanceState)
 
         val shopRecyclerView = view.findViewById<RecyclerView> (R.id.shop_recycler_view)
-        val adapter = ComicListAdapter (context!!)
+        val adapter = ComicShopAdapter (context!!)
         shopRecyclerView.adapter = adapter
         shopRecyclerView.layoutManager = LinearLayoutManager (view.context)
 
         comicViewModel = ViewModelProviders.of (context as FragmentActivity).get (ComicViewModel::class.java)
         comicViewModel.shoppingList.observe (this, Observer { comics ->
-            comics?.let { adapter.comicList = comics}
+            comics?.let { adapter.shopList = comics}
         })
     }
 }

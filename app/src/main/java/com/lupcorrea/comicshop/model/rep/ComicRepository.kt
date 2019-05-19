@@ -4,16 +4,17 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lupcorrea.comicshop.api.MarvelAPIConsumer
 import com.lupcorrea.comicshop.model.ent.Comic
+import com.lupcorrea.comicshop.model.ent.ComicReference
 
 class ComicRepository (application: Application) {
     val marvel = MarvelAPIConsumer (application)
 
     val shoppingList = MutableLiveData<List<Comic>>()
-    val checkoutList = MutableLiveData<MutableList<Comic>>()
+    val checkoutList = MutableLiveData<List<ComicReference>>()
 
     init {
         shoppingList.value = emptyList<Comic>()
-        checkoutList.value = mutableListOf<Comic>()
+        checkoutList.value = emptyList<ComicReference>()
 
         fillShoppingList()
     }
@@ -23,7 +24,9 @@ class ComicRepository (application: Application) {
     }
 
     fun addComicToCheckout (comic: Comic) {
-        checkoutList.value!!.add (comic)
+        val tempList = checkoutList.value!!.toMutableList()
+        tempList.add (ComicReference (comic.id, 1))
+        checkoutList.value = tempList.toList()
     }
 
 }

@@ -9,6 +9,7 @@
         android:id="@+id/checkout_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/comic_checkout_item"/>
+        tools:listitem="@layout/comic_checkout_item"
+        android:background="@drawable/checkout_mockup"/>
 
 </FrameLayout>

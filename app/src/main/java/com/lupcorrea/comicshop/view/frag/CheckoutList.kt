@@ -1,7 +1,6 @@
 package com.lupcorrea.comicshop.view.frag
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lupcorrea.comicshop.R
-import com.lupcorrea.comicshop.adapter.ComicListAdapter
+import com.lupcorrea.comicshop.adapter.ComicCheckoutAdapter
 import com.lupcorrea.comicshop.viewmodel.ComicViewModel
 
 class CheckoutList : Fragment() {
@@ -30,15 +29,12 @@ class CheckoutList : Fragment() {
         super.onViewCreated (view, savedInstanceState)
 
         val checkoutRecyclerView = view.findViewById<RecyclerView> (R.id.checkout_recycler_view)
-        val adapter = ComicListAdapter (view.context)
+        val adapter = ComicCheckoutAdapter (view.context)
         checkoutRecyclerView.adapter = adapter
         checkoutRecyclerView.layoutManager = LinearLayoutManager (view.context)
 
         comicViewModel = ViewModelProviders.of (context as FragmentActivity).get (ComicViewModel::class.java)
         comicViewModel.checkoutList.observe (this, Observer { comics ->
-            comics?.let {
-                Log.e ("ViewModel", comics.toString())
-                adapter.comicList = comics}
-        })
+            comics?.let { adapter.checkoutList = comics} })
     }
 }

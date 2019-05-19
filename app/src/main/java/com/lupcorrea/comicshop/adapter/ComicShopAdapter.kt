@@ -7,17 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.lupcorrea.comicshop.R
 import com.lupcorrea.comicshop.model.ent.Comic
-import com.lupcorrea.comicshop.viewmodel.ComicViewModel
 
-class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapter.ComicViewHolder>() {
-    private val context = context
+class ComicShopAdapter (context: Context) : RecyclerView.Adapter<ComicShopAdapter.ComicViewHolder>() {
     private val layoutInflater = LayoutInflater.from (context)
-    var comicList = emptyList<Comic>()
+    var shopList = emptyList<Comic>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -37,10 +33,10 @@ class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapte
         return ComicViewHolder(itemView)
     }
 
-    override fun getItemCount() = comicList.size
+    override fun getItemCount() = shopList.size
 
     override fun onBindViewHolder(holder: ComicViewHolder, position: Int) {
-        val currentComic = comicList [position]
+        val currentComic = shopList [position]
 
         // Setup prices as string
         val price = "$" + currentComic.price
@@ -77,7 +73,7 @@ class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapte
             }
         }
         holder.buttonAddToCart.setOnClickListener {
-            ViewModelProviders.of (context as FragmentActivity).get (ComicViewModel::class.java).addComicToCheckout (currentComic)
+            //TODO: Add to checkout
         }
     }
 }

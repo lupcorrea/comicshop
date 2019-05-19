@@ -7,7 +7,6 @@ import com.lupcorrea.comicshop.R
 import com.lupcorrea.comicshop.adapter.ViewPagerAdapter
 
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,5 +15,10 @@ class MainActivity : AppCompatActivity() {
 
         val viewPager = findViewById<ViewPager> (R.id.view_pager)
         viewPager.adapter = ViewPagerAdapter (supportFragmentManager)
+
+        /* TODO:
+        val tabLayout = findViewById<TabLayout> (R.id.tabs_main)
+        tabLayout.setupWithViewPager (viewPager)
+        */
     }
 }

@@ -1,6 +1,5 @@
 package com.lupcorrea.comicshop.adapter
 
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.lupcorrea.comicshop.view.frag.CheckoutList
@@ -12,11 +11,15 @@ class ViewPagerAdapter (fm: FragmentManager): FragmentPagerAdapter (fm) {
         CheckoutList()
     )
 
-    override fun getItem (position: Int): Fragment {
-        return fragments [position]
-    }
+    override fun getItem (position: Int) = fragments [position]
 
-    override fun getCount(): Int {
-        return fragments.size
+    override fun getCount() = fragments.size
+
+    override fun getPageTitle (position: Int): CharSequence? {
+        return when (position) {
+            0 -> "Shopping"
+            1 -> "Checkout"
+            else -> ""
+        }
     }
 }

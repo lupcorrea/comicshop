@@ -38,7 +38,7 @@ class MarvelAPIConsumer (app: Application) {
                 for (c in 0 until limit) {
                     val comic = comics.getJSONObject (c)
 
-                    val id = comic.getString ("id")
+                    val id = comic.getInt ("id")
 
                     val title = comic.getString ("title")
 
@@ -87,7 +87,7 @@ class MarvelAPIConsumer (app: Application) {
                 }
             }, 0, 0, ImageView.ScaleType.CENTER_CROP, Bitmap.Config.RGB_565,
             Response.ErrorListener {
-                Log.e ("API Request", comic.id)
+                Log.e ("API Request", it.toString())
             })
 
         queue.add (imageRequest)

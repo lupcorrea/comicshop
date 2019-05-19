@@ -42,7 +42,23 @@
         android:background="@color/cardview_dark_background"
         android:textColor="@color/cardview_light_background"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
+
+<!--TODO:
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/rare"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+-->
 
     <TextView
         android:id="@+id/comic_description"
@@ -67,7 +83,14 @@
             android:id="@+id/button_return_to_list"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@drawable/ret"
+            android:scaleType="fitXY"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
 
         <ImageButton
             android:id="@+id/button_add_to_cart"
@@ -78,7 +101,9 @@
             android:scaleType="fitXY"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
 
     </LinearLayout>
 
