@@ -11,6 +11,8 @@ import com.android.volley.toolbox.ImageRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.lupcorrea.comicshop.model.ent.Comic
+import kotlin.random.Random
+
 
 // TODO: Incorporate MD5 generator into code
 
@@ -31,6 +33,7 @@ class MarvelAPIConsumer (app: Application) {
             Response.Listener { response ->
                 val comics = response.getJSONObject ("data").getJSONArray ("results")
                 val tempList = mutableListOf<Comic>()
+                val rareIndexes = List ((limit * 0.12).toInt()) { Random.nextInt (0, limit) }
 
                 for (c in 0 until limit) {
                     val comic = comics.getJSONObject (c)
@@ -62,8 +65,10 @@ class MarvelAPIConsumer (app: Application) {
 
                     val description = comic.getString ("description")
 
-                    if (c == limit-1) requestImage (imagePath, Comic (id, title, null, creators, description, price), tempList, comicList)
-                    else requestImage (imagePath, Comic (id, title, null, creators, description, price), tempList, null)
+                    val isRare = rareIndexes.contains (c)
+
+                    if (c == limit-1) requestImage (imagePath, Comic (id, title, null, creators, description, price, isRare), tempList, comicList)
+                    else requestImage (imagePath, Comic (id, title, null, creators, description, price, isRare), tempList, null)
                 }
             }, Response.ErrorListener {
                 Log.e("API Request", it.toString())
@@ -78,7 +83,6 @@ class MarvelAPIConsumer (app: Application) {
                 comic.image = response
                 tempList.add (comic)
                 if (comicList != null) {
-                    Log.e ("API Request", "Henlo!")
                     comicList.value = tempList.toList()
                 }
             }, 0, 0, ImageView.ScaleType.CENTER_CROP, Bitmap.Config.RGB_565,

@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.lupcorrea.comicshop.R
 import com.lupcorrea.comicshop.model.ent.Comic
+import com.lupcorrea.comicshop.viewmodel.ComicViewModel
 
 class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapter.ComicViewHolder>() {
+    private val context = context
     private val layoutInflater = LayoutInflater.from (context)
     var comicList = emptyList<Comic>()
         set(value) {
@@ -22,8 +26,6 @@ class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapte
     inner class ComicViewHolder (itemView: View) : RecyclerView.ViewHolder (itemView) {
         val comicTitle: TextView = itemView.findViewById(R.id.list_comic_title)
         val comicPrice: TextView = itemView.findViewById(R.id.list_comic_price)
-        val comicDiscount: TextView = itemView.findViewById(R.id.list_comic_discount_common)
-        val comicDiscountRare: TextView = itemView.findViewById(R.id.list_comic_discount_rare)
         val comicPoster: ImageView = itemView.findViewById(R.id.list_comic_poster)
 
         val buttonInformation: ImageButton = itemView.findViewById(R.id.list_comic_get_info)
@@ -31,7 +33,7 @@ class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
-        val itemView = layoutInflater.inflate(R.layout.comic_item, parent, false)
+        val itemView = layoutInflater.inflate(R.layout.comic_shop_item, parent, false)
         return ComicViewHolder(itemView)
     }
 
@@ -42,14 +44,10 @@ class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapte
 
         // Setup prices as string
         val price = "$" + currentComic.price
-        val commonDiscount = "$" + currentComic.commonDiscountedPrice
-        val rareDiscount = "$" + currentComic.rareDiscountedPrice
 
         // Setup texts and image
         holder.comicTitle.text = currentComic.title
         holder.comicPrice.text = price
-        holder.comicDiscount.text = commonDiscount
-        holder.comicDiscountRare.text = rareDiscount
         holder.comicPoster.setImageBitmap (currentComic.image)
 
         // Setup buttons
@@ -61,8 +59,6 @@ class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapte
             infoPopup.findViewById<TextView>(R.id.comic_title).text = currentComic.title
             infoPopup.findViewById<TextView>(R.id.comic_creators).text = currentComic.creators
             infoPopup.findViewById<TextView>(R.id.comic_price).text = price
-            infoPopup.findViewById<TextView>(R.id.comic_discount_common).text = commonDiscount
-            infoPopup.findViewById<TextView>(R.id.comic_discount_rare).text = rareDiscount
             infoPopup.findViewById<TextView>(R.id.comic_description).text = currentComic.description
             infoPopup.findViewById<TextView>(R.id.comic_description).movementMethod = ScrollingMovementMethod()
             // This is only allowed in API 26, sadly: infoPopup.findViewById<TextView>(R.id.comic_description).justificationMode = JUSTIFICATION_MODE_INTER_WORD
@@ -74,14 +70,14 @@ class ComicListAdapter (context: Context) : RecyclerView.Adapter<ComicListAdapte
 
             // Set up buttons
             infoPopup.findViewById<ImageButton>(R.id.button_add_to_cart).setOnClickListener {
-                //TODO: Add to cart
+                //TODO: Add to checkout
             }
             infoPopup.findViewById<ImageButton>(R.id.button_return_to_list).setOnClickListener {
                 popupWindow.dismiss()
             }
         }
         holder.buttonAddToCart.setOnClickListener {
-            // TODO: Add to cart
+            ViewModelProviders.of (context as FragmentActivity).get (ComicViewModel::class.java).addComicToCheckout (currentComic)
         }
     }
 }

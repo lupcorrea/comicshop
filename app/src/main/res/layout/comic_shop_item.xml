@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="350dp"
+    android:weightSum="10"
+    android:layout_margin="10dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp">
+
+    <ImageView
+        android:id="@+id/list_comic_poster"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        app:srcCompat="@color/colorAccent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:weightSum="5"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/list_comic_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.75"
+            android:text="Comic Title"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+<!-- TODO:
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            android:scaleType="fitXY"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:src="@drawable/rare_mark"/>
+-->
+        <TextView
+            android:id="@+id/list_comic_price"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="One million dollars!"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:background="@color/cardview_dark_background"
+            android:textColor="@color/cardview_light_background"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <ImageButton
+            android:id="@+id/list_comic_get_info"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/more_information"
+            android:scaleType="fitXY"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:background="@android:color/transparent"/>
+
+        <ImageButton
+            android:id="@+id/list_comic_add_to_cart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/add_to_checkout"
+            android:scaleType="fitXY"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+</LinearLayout>

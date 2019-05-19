@@ -32,40 +32,17 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/comic_price"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <TextView
-            android:id="@+id/comic_price"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/comic_discount_common"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/comic_discount_rare"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="@color/cardview_dark_background"
+        android:textColor="@color/cardview_light_background"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/comic_description"
@@ -96,7 +73,12 @@
             android:id="@+id/button_add_to_cart"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@drawable/add_to_checkout"
+            android:scaleType="fitXY"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
 

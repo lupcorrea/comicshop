@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,11 +29,11 @@ class ShopList : Fragment() {
         super.onViewCreated (view, savedInstanceState)
 
         val shopRecyclerView = view.findViewById<RecyclerView> (R.id.shop_recycler_view)
-        val adapter = ComicListAdapter (view.context)
+        val adapter = ComicListAdapter (context!!)
         shopRecyclerView.adapter = adapter
         shopRecyclerView.layoutManager = LinearLayoutManager (view.context)
 
-        comicViewModel = ViewModelProviders.of (this).get (ComicViewModel::class.java)
+        comicViewModel = ViewModelProviders.of (context as FragmentActivity).get (ComicViewModel::class.java)
         comicViewModel.shoppingList.observe (this, Observer { comics ->
             comics?.let { adapter.comicList = comics}
         })

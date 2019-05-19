@@ -6,6 +6,8 @@ import androidx.viewpager.widget.ViewPager
 import com.lupcorrea.comicshop.R
 import com.lupcorrea.comicshop.adapter.ViewPagerAdapter
 
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

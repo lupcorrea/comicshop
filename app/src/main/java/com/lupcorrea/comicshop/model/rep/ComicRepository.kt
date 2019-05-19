@@ -9,17 +9,21 @@ class ComicRepository (application: Application) {
     val marvel = MarvelAPIConsumer (application)
 
     val shoppingList = MutableLiveData<List<Comic>>()
-    val checkoutList = MutableLiveData<List<Comic>>()
+    val checkoutList = MutableLiveData<MutableList<Comic>>()
 
     init {
         shoppingList.value = emptyList<Comic>()
-        checkoutList.value = emptyList<Comic>()
+        checkoutList.value = mutableListOf<Comic>()
 
         fillShoppingList()
     }
 
     fun fillShoppingList() {
         marvel.requestComicList (25, shoppingList)
+    }
+
+    fun addComicToCheckout (comic: Comic) {
+        checkoutList.value!!.add (comic)
     }
 
 }
