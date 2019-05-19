@@ -40,31 +40,30 @@ class MarvelAPIConsumer (app: Application) {
                     val title = comic.getString ("title")
 
                     val imagePath = comic.getJSONObject ("thumbnail").getString ("path") +
-                            "/portrait_xlarge." +
+                            "/portrait_uncanny." +
                             comic.getJSONObject ("thumbnail").getString ("extension")
 
                     var creators = ""
                     val creatorsArray = comic.getJSONObject ("creators").getJSONArray ("items")
-                    if (creatorsArray.length() > 0) {
-                        creators += creatorsArray.getJSONObject (0).getString ("name")
-                        for (creatorIndex in 0 until creatorsArray.length()) creators += ", " + creatorsArray.getJSONObject (creatorIndex).getString ("name")
-                    }
-
-                    val pages = comic.getString ("pageCount")
-
-                    var chars = ""
-                    val charsArray = comic.getJSONObject ("characters").getJSONArray ("items")
-                    if (charsArray.length() > 0) {
-                        chars += charsArray.getJSONObject (0).getString ("name")
-                        for (charIndex in 0 until charsArray.length()) chars += ", " + charsArray.getJSONObject (charIndex).getString ("name")
+                    if (creatorsArray.length() > 0) creators += creatorsArray.getJSONObject (0).getString ("name")
+                    if (creatorsArray.length() > 1) {
+                        for (creatorIndex in 1 until creatorsArray.length()) {
+                            creators += ", " + creatorsArray.getJSONObject(creatorIndex).getString("name")
+                            if (creatorIndex == 3) {
+                                creators += ", and others."
+                                break
+                            }
+                        }
                     }
 
                     val series = comic.getJSONObject ("series").getString ("name")
 
                     val price = comic.getJSONArray ("prices").getJSONObject (0).getDouble ("price")
 
-                    if (c == limit-1) requestImage (imagePath, Comic (id, title, null, creators, pages, chars, series, price), tempList, comicList)
-                    else requestImage (imagePath, Comic (id, title, null, creators, pages, chars, series, price), tempList, null)
+                    val description = comic.getString ("description")
+
+                    if (c == limit-1) requestImage (imagePath, Comic (id, title, null, creators, description, price), tempList, comicList)
+                    else requestImage (imagePath, Comic (id, title, null, creators, description, price), tempList, null)
                 }
             }, Response.ErrorListener {
                 Log.e("API Request", it.toString())

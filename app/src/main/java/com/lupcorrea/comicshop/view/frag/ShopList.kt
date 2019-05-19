@@ -34,7 +34,7 @@ class ShopList : Fragment() {
 
         comicViewModel = ViewModelProviders.of (this).get (ComicViewModel::class.java)
         comicViewModel.shoppingList.observe (this, Observer { comics ->
-            comics?.let { adapter.comicList = it }
+            comics?.let { adapter.comicList = comics}
         })
     }
 }
