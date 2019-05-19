@@ -2,11 +2,11 @@ package com.lupcorrea.comicshop.api
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.lupcorrea.comicshop.adapter.ComicListAdapter
 import com.lupcorrea.comicshop.model.ent.Comic
 
 // TODO: Incorporate MD5 generator into code
@@ -21,27 +21,30 @@ class MarvelAPIConsumer (app: Application) {
 
     private val queue = Volley.newRequestQueue (app.applicationContext)
 
-    fun requestComicList (limit: Int, adapter: ComicListAdapter) {
+    fun requestComicList (limit: Int, comicList: MutableLiveData<List<Comic>>) {
         val requestURL = "$url?format=comic&orderBy=-issueNumber&limit=$limit&$requestEnd"
 
         val request = JsonObjectRequest (Request.Method.GET, requestURL, null,
             Response.Listener { response ->
                 val comics = response.getJSONObject ("data").getJSONArray ("results")
+                val tempList = mutableListOf<Comic>()
 
                 for (c in 0 until limit-1) {
                     val comic = comics.getJSONObject (c)
                     //TODO: real data for what is hardcoded.
-                    adapter.addComic (Comic (
+                    tempList.add (Comic (
                         comic.getString("title"),
                         "Ukulele",
                         comic.getString ("pageCount"),
                         "Ukulele",
                         "Ukulele",
                         comic.getString ("issueNumber"),
-                        "Ukulele"
-                    ))
+                        "Ukulele"))
                 }
 
+                comicList.value = tempList.toList()
+                Log.e ("API Request", tempList.toString())
+                Log.e ("API Request", comicList.toString())
             }, Response.ErrorListener {
                 Log.e("API Request", it.toString())
             })

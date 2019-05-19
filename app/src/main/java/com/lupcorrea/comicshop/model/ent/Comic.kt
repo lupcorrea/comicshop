@@ -1,12 +1,5 @@
 package com.lupcorrea.comicshop.model.ent
 
-class Comic (title: String, creators: String, pages: String, chars: String, series: String, issue: String, price: String) {
-    val title = title
-    val creators = creators
-    val pages = pages
-    val chars = chars
-    val series = series
-    val issue = issue
-    val price = price
+class Comic (val title: String, val creators: String, val pages: String, val chars: String, val series: String, val issue: String, val price: String) {
     //TODO: Poster
 }

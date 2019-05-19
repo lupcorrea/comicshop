@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lupcorrea.comicshop.R
 import com.lupcorrea.comicshop.adapter.ComicListAdapter
-import com.lupcorrea.comicshop.api.MarvelAPIConsumer
+import com.lupcorrea.comicshop.viewmodel.ComicViewModel
 
 class ShopList : Fragment() {
+    private lateinit var comicViewModel: ComicViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,10 +28,13 @@ class ShopList : Fragment() {
         super.onViewCreated (view, savedInstanceState)
 
         val shopRecyclerView = view.findViewById<RecyclerView> (R.id.shop_recycler_view)
-        shopRecyclerView.adapter = ComicListAdapter (view.context)
+        val adapter = ComicListAdapter (view.context)
+        shopRecyclerView.adapter = adapter
         shopRecyclerView.layoutManager = LinearLayoutManager (view.context)
 
-        val api = MarvelAPIConsumer (this.activity!!.application)
-        api.requestComicList (25, shopRecyclerView.adapter as ComicListAdapter)
+        comicViewModel = ViewModelProviders.of (this).get (ComicViewModel::class.java)
+        comicViewModel.shoppingList.observe (this, Observer { comics ->
+            comics?.let { adapter.comicList = it }
+        })
     }
 }
