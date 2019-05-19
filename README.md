@@ -1,7 +1,19 @@
 # Comic Shop
 
-## Introduction
+![](demo.gif)
 
-<p align="center>
-    [![Comic Shop Demo](http://img.youtube.com/vi/KQ1sdJ6g7p8/0.jpg)](http://www.youtube.com/watch?v=KQ1sdJ6g7p8 "Comic Shop Demo")      
-</p>
+## English Documentation
+### Introduction
+
+### What it does
+
+### What it does not do (yet!)
+
+## Documentação em Português
+### Introdução
+
+### O que isso faz
+
+### O que isso não faz (ainda!)
+
+
