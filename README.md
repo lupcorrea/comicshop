@@ -14,6 +14,8 @@ For this project, I followed the MVVM architecture.
 
 For the Model layer, I planned on using [Room](https://developer.android.com/topic/libraries/architecture/room). Unfortunately, I couldn't get it to work in time, making me unable to implement the whole database side of the model. With that in mind, the repository is only fed by the API consumer, and has no persistence (yet!). 
 
+For the API consume side of the model, I used [Volley](https://developer.android.com/training/volley/index.html).
+
 Due to the simplicity of the scope, I only needed two entities: one for the comic, and one for a comic reference. The comic one is responsible for storing data acquired through the API consume. The reference one is responsible for storing the id of comics added to checkout, and its amount. I decided to use a simpler data class because there is no need to store the same data twice in the app.
 
 The ViewModel layer completely isolates the Model layer from the View layer, while still providing access to the model data. The other true advantage of ViewModel is being able to be retrieved in a singleton-like fashion through the use of [ViewModelProviders](https://developer.android.com/reference/androidx/lifecycle/ViewModelProviders), making sure that data is the same no matter where the user is in the application. While I could build a ViewModel for each of my entities, I preferred to use only one to rule them all, since both of my entities are related (kinda).
@@ -57,5 +59,6 @@ Yeah, I know, it does not look like a popup in the application, and that happens
 * Retrieve data gradually. It currently waits for all of the images to be retrieved to load the whole list at once.
 * Implement loading more 25 entries when user reaches the bottom of the list.
 * Implement search filters.
+* Tests!
 
 
